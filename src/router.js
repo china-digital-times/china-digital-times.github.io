@@ -14,8 +14,8 @@ export const updateRouter = (url = location.href) => {
     } else if (hash == "#/") {  // homepage
         loadHomepage()
         return
-    } else if (hash.startsWith("#/id/")) {
-        const m = hash.match(/^#\/id\/(\d+)\/?$/)
+    } else if (hash.startsWith("#/id/") || hash.startsWith("#/p/")) {
+        const m = hash.match(/^#\/(?:id|p)\/(\d+)\/?$/)
         if (m) {
             loadArticlePageByID(+m[1])
             return
