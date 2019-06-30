@@ -1,0 +1,17 @@
+{
+  "name": "china-digital-times.github.io",
+  "private": true,
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/china-digital-times/china-digital-times.github.io.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/china-digital-times/china-digital-times.github.io/issues"
+  },
+  "homepage": "https://github.com/china-digital-times/china-digital-times.github.io#readme",
+  "dependencies": {
+    "whatwg-fetch": "^3.0.0"
+  }
+}
