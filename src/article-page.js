@@ -28,7 +28,8 @@ export const loadArticlePageByLink = async (link) => {
     console.log(link)
     const id = link2id[link]
     if (id) {
-        loadArticlePageByID(+id)
+        // loadArticlePageByID(+id)
+        location.href = `#/id/${id}`
     } else {
         load404Page()
     }
