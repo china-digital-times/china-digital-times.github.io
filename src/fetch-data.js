@@ -25,7 +25,21 @@ export const fetchIndexData = (name) => {
 }
 
 /**
+ * @typedef {Object} PostData
+ * @property {number} id
+ * @property {string} link
+ * @property {string} date
+ * @property {string} modified
+ * @property {string} title
+ * @property {string} content
+ * @property {number} author
+ * @property {number[]} categories
+ * @property {number[]} tags
+ */
+
+/**
  * @param {number} id Post ID
+ * @returns {Promise<PostData>}
  */
 export const fetchPostData = (id) => {
     return fetchDataJson("data", `${id}.json`, false)
