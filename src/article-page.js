@@ -13,7 +13,7 @@ export const loadArticlePageByID = async (id) => {
     loadLoadingPage()  // 异步加载时显示加载中页面
     const postdata = await fetchPostData(id)
     if (postdata.title && postdata.content) {
-        loadPost(postdata.title, postdata.content, { date: postdata.date })
+        loadPost(postdata.title, postdata.content, { date: postdata.date, id, })
     } else {
         load404Page()
     }

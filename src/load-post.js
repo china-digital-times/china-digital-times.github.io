@@ -4,6 +4,8 @@ import { getChineseDateString } from "./date"
 
 /**
  * @typedef {Object} PostMeta
+ * @property {number=} id
+ * @property {string=} link
  * @property {string=} date
  * @property {number=} author
  * @property {number[]=} categories
@@ -31,6 +33,15 @@ export const loadPost = (title, content, meta = null) => {
             const dateContainer = document.createElement("div")
             dateContainer.textContent = getChineseDateString(new Date(meta.date))
             postMetaContainer.appendChild(dateContainer)
+        }
+
+        if (meta.link || meta.id) {
+            const originalLinkContainer = document.createElement("div")
+            const a = document.createElement("a")
+            a.textContent = "原始链接"
+            a.href = meta.link || `https://chinadigitaltimes.net/chinese/?p=${meta.id}`
+            originalLinkContainer.appendChild(a)
+            postMetaContainer.appendChild(originalLinkContainer)
         }
     }
 
