@@ -13,5 +13,15 @@
   "homepage": "https://github.com/china-digital-times/china-digital-times.github.io#readme",
   "dependencies": {
     "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "core-js": "^3.1.4",
+    "parcel-bundler": "^1.12.3"
+  },
+  "scripts": {
+    "build": "parcel build ./src/index.js -d ./dist --public-url ./ --detailed-report",
+    "watch": "parcel watch ./src/index.js -d ./dist --public-url ./ --no-hmr"
   }
 }

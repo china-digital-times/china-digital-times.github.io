@@ -63,3 +63,9 @@ package-lock.json
 
 # next.js build output
 .next
+
+/test/
+
+.cache
+
+*.map

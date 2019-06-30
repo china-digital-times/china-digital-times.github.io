@@ -422,7 +422,8 @@ div.menu li {
 	margin: 0 2px 2px 0;
 	float: left;
 }
-.home_cat_block h3
+.home_cat_block h3,
+.home_post_list_block h3
 {
 	font-size: 20px;
 	height: 28px;
@@ -465,7 +466,8 @@ div.menu li {
 }
 #content
 {
-	width: 710px;
+	width: 100%;
+	min-height: 50vh;
 	float: left;
 	margin: 0 15px 0 0;
 }
@@ -542,7 +544,7 @@ ul#menu li a:hover {
 -------------------------------------------------------------- */
 .post
 {
-	width: 710px;
+	width: 100%;
 }
 .post h1.title
 {
@@ -1766,3 +1768,22 @@ input[name=EMAIL] {
 .screen-reader-text {}
 .gallery-caption {}
 .aligncenter {}
+
+img.wp-smiley,
+img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 .07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.home_post_list_block {
+    padding: 15px;
+    background: #D7E2E8;
+    margin: 0 2px 2px 0;
+}
