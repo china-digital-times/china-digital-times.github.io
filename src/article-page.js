@@ -1,6 +1,6 @@
 // @ts-check
 
-import { fetchPostData } from "./fetch-data"
+import { fetchPostData, fetchIndexData } from "./fetch-data"
 import loadPost from "./load-post"
 
 import { loadLoadingPage } from "./loading-page"
@@ -9,7 +9,7 @@ import { load404Page } from "./404page"
 /**
  * @param {number} id Post ID
  */
-export const loadArticlePage = async (id) => {
+export const loadArticlePageByID = async (id) => {
     loadLoadingPage()  // 异步加载时显示加载中页面
     const postdata = await fetchPostData(id)
     if (postdata.title && postdata.content) {
@@ -19,4 +19,17 @@ export const loadArticlePage = async (id) => {
     }
 }
 
-export default loadArticlePage
+/**
+ * @param {string} link 
+ */
+export const loadArticlePageByLink = async (link) => {
+    loadLoadingPage()
+    const link2id = await fetchIndexData("link2id")
+    console.log(link)
+    const id = link2id[link]
+    if (id) {
+        loadArticlePageByID(+id)
+    } else {
+        load404Page()
+    }
+}
