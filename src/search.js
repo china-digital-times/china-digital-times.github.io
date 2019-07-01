@@ -8,7 +8,7 @@ import { fetchIndexData } from "./fetch-data"
  */
 export const getSearchResult = async (q) => {
     const _q = q.replace(/\s+/g, "+")
-    const url = `https://api.github.com/search/code?q=${_q}+in:file+repo:china-digital-times/data&per_page=100`
+    const url = `https://api.github.com/search/code?q=${_q}+in:file+repo:china-digital-times/data&per_page=100&sort=indexed`
 
     try {
         const r = await fetch(url, {
