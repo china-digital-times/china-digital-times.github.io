@@ -14,10 +14,13 @@ export const buildPostAnchor = (post) => {
     return a
 }
 
-const buildH3 = () => {
+/**
+ * @param {string} blockTitle 
+ */
+const buildH3 = (blockTitle) => {
     const h3 = document.createElement("h3")
     const h3a = document.createElement("a")
-    h3a.textContent = "最近100篇文章"
+    h3a.textContent = blockTitle
     h3.appendChild(h3a)
     return h3
 }
@@ -50,14 +53,26 @@ const buildListContainer = (postList) => {
 /**
  * @param {PostListItem[]} postList 
  */
-export const buildPostListBlock = (postList) => {
+export const buildPostListBlock = (postList, blockTitle = "最近100篇文章", noPostText = "没有文章") => {
     const container = document.createElement("div")
     container.classList.add("home_post_list_block")
 
-    const h3 = buildH3()
-    const listContainer = buildListContainer(postList)
+    if (blockTitle && typeof blockTitle == "string") {
+        const h3 = buildH3(blockTitle)
+        container.appendChild(h3)
+    }
 
-    container.append(h3, listContainer)
+    if (!Array.isArray(postList)) {
+        postList = []
+    }
+
+    if (postList.length > 0) {
+        const listContainer = buildListContainer(postList)
+        container.appendChild(listContainer)
+    } else if (noPostText && typeof noPostText == "string") {
+        container.appendChild(document.createTextNode(noPostText))
+    }
+
     return container
 }
 

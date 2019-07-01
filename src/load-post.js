@@ -46,6 +46,7 @@ export const loadPost = (title, content, meta = null) => {
     }
 
     if (content instanceof Node) {
+        postContentContainer.innerHTML = ""
         postContentContainer.appendChild(content)
     } else {
         postContentContainer.innerHTML = content

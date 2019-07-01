@@ -3,6 +3,7 @@
 import { loadHomepage } from "./homepage"
 import { load404Page } from "./404page"
 import { loadArticlePageByID, loadArticlePageByLink } from "./article-page"
+import { loadSearchPage } from "./search-page"
 
 export const updateRouter = (url = location.href) => {
     const u = new URL(url)
@@ -42,6 +43,13 @@ export const updateRouter = (url = location.href) => {
             }
 
             loadArticlePageByLink(linkDecoded)
+            return
+        }
+    } else if (hash.startsWith("#/search/")) {
+        const m = hash.match(/^#\/search\/(.+)$/)
+        if (m) {
+            const q = m[1]
+            loadSearchPage(q)
             return
         }
     }
