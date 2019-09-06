@@ -58,6 +58,19 @@ export const loadPost = (title, content, meta = null) => {
             a.href = "#/link/" + a.href
         }
     })
+
+    // 自动替换图片地址为在Github备份的图片
+    const imgReg = /^(?:https?:\/\/|)chinadigitaltimes\.net\/chinese(.*)\/files\//
+    const newUCDN = "https://cdn.statically.io/gh/china-digital-times/files/master/"
+    const newUGithub = "https://raw.githubusercontent.com/china-digital-times/files/master/"
+
+    postContentContainer.querySelectorAll("img").forEach((imgE) => {
+        const oldSrc = imgE.src
+        const newSrcCDN = oldSrc.replace(imgReg, newUCDN)
+        const newSrcGithub = oldSrc.replace(imgReg, newUGithub)
+        imgE.src = newSrcGithub
+        imgE.srcset = `${newSrcCDN}, ${newSrcGithub}, ${oldSrc}`
+    })
 }
 
 export default loadPost
