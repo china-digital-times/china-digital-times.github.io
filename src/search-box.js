@@ -4,8 +4,8 @@ export const showSearchBox = () => {
     const searchBoxContainer = document.getElementById("search-box")
 
     const input = document.createElement("input")
-    input.type = "text"
-    input.id = "s"
+    input.type = "search"
+    input.classList.add("et-search-field")
     input.value = "站内搜索"
     input.onblur = () => {
         if (input.value == "") {
@@ -35,10 +35,8 @@ export const showSearchBox = () => {
         }
     }
 
-    const submitBtn = document.createElement("input")
-    submitBtn.type = "submit"
-    submitBtn.id = "searchsubmit"
-    submitBtn.value = ""
+    const submitBtn = document.createElement("button")
+    submitBtn.classList.add("et-search-submit")
     submitBtn.onclick = onSubmit
     searchBoxContainer.appendChild(submitBtn)
 

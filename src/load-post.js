@@ -30,13 +30,17 @@ export const loadPost = (title, content, meta = null) => {
 
     if (meta) {
         if (meta.date) {
-            const dateContainer = document.createElement("div")
-            dateContainer.textContent = getChineseDateString(new Date(meta.date))
-            postMetaContainer.appendChild(dateContainer)
+            const dateContainer0 = document.createElement("p")
+            const dateContainer1 = document.createElement("span")
+            dateContainer1.classList.add("updated")
+            dateContainer1.textContent = getChineseDateString(new Date(meta.date))
+            dateContainer0.appendChild(dateContainer1)
+            postMetaContainer.appendChild(dateContainer0)
         }
 
         if (meta.link || meta.id) {
             const originalLinkContainer = document.createElement("div")
+            originalLinkContainer.id = "syndication_permalink"
             const a = document.createElement("a")
             a.textContent = "原始链接"
             a.href = meta.link || `https://chinadigitaltimes.net/chinese/?p=${meta.id}`
