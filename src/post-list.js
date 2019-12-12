@@ -9,10 +9,11 @@ import { fetchIndexData } from "./fetch-data"
  */
 
 /**
+ * @param {string} indexName 
  * @returns {Promise<PostListItem[]>}
  */
-export const fetchLatest100PostList = async (reverse = true) => {
-    const data = await fetchIndexData("latest100id2title")
+const fetchPostList = async (indexName, reverse = true) => {
+    const data = await fetchIndexData(indexName)
 
     /** [id, title] */
     const list = Object.entries(data)
@@ -29,6 +30,39 @@ export const fetchLatest100PostList = async (reverse = true) => {
     }
 
     return postlist
+}
+
+export const fetchLatest100PostList = async (reverse = true) => {
+    return fetchPostList("latest100id2title", reverse)
+}
+
+/** @type {PostListItem[]} */
+let allPostListCache
+
+export const fetchAllPostList = async (reverse = true) => {
+    if (!allPostListCache) {
+        allPostListCache = await fetchPostList("id2title", reverse)
+    }
+    return allPostListCache
+}
+
+/**
+ * @param {number} page 
+ * @param {number=} itemsPerPage 
+ * @param {boolean=} reverse 
+ */
+export const fetchPostListPage = async (page, itemsPerPage = 100, reverse = true) => {
+    const postList = await fetchAllPostList(reverse)
+    return postListPagination(postList, page, itemsPerPage)
+}
+
+/**
+ * @param {PostListItem[]} postList 
+ * @param {number} page 
+ * @param {number=} itemsPerPage 
+ */
+export const postListPagination = (postList, page, itemsPerPage = 100) => {
+    return postList.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
 }
 
 /**

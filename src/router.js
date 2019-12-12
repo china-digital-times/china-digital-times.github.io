@@ -5,6 +5,8 @@ import { load404Page } from "./404page"
 import { loadArticlePageByID, loadArticlePageByLink } from "./article-page"
 import { loadSearchPage } from "./search-page"
 
+const indexPageReg = /^#\/\?page=(\d+)$/
+
 export const updateRouter = (url = location.href) => {
     const u = new URL(url)
     const hash = u.hash
@@ -14,6 +16,10 @@ export const updateRouter = (url = location.href) => {
         return
     } else if (hash == "#/") {  // homepage
         loadHomepage()
+        return
+    } else if (hash.match(indexPageReg)) {
+        const m = hash.match(indexPageReg)
+        loadHomepage(+m[1])
         return
     } else if (hash.startsWith("#/id/") || hash.startsWith("#/p/")) {
         const m = hash.match(/^#\/(?:id|p)\/(\d+)\/?$/)

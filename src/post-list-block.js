@@ -53,7 +53,7 @@ const buildListContainer = (postList) => {
 /**
  * @param {PostListItem[]} postList 
  */
-export const buildPostListBlock = (postList, blockTitle = "最近100篇文章", noPostText = "没有文章") => {
+export const buildPostListBlock = (postList, blockTitle = "最新文章", noPostText = "没有文章") => {
     const container = document.createElement("div")
     container.classList.add("home_post_list_block")
 
