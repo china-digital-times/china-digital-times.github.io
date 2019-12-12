@@ -1,6 +1,6 @@
 // @ts-check
 
-import { fetchLatest100PostList, fetchPostListPage } from "./post-list"
+import { fetchPostListPage } from "./post-list"
 import { buildPostListBlock } from "./post-list-block"
 import loadPost from "./load-post"
 
@@ -44,9 +44,7 @@ export const loadHomepage = async (page = 1) => {
         page = 1
     }
 
-    const postlist = page == 1
-        ? await fetchLatest100PostList()
-        : await fetchPostListPage(page, itemsPerPage)
+    const postlist = await fetchPostListPage(page, itemsPerPage)
 
     if (!postlist.length) {  // postlist.length == 0
         load404Page()

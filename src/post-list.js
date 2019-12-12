@@ -50,8 +50,17 @@ export const fetchAllPostList = async (reverse = true) => {
  * @param {number} page 
  * @param {number=} itemsPerPage 
  * @param {boolean=} reverse 
+ * @param {boolean=} prefetch 
  */
-export const fetchPostListPage = async (page, itemsPerPage = 100, reverse = true) => {
+export const fetchPostListPage = async (page, itemsPerPage = 100, reverse = true, prefetch = true) => {
+    if (!allPostListCache && page == 1) {
+        const postList = await fetchLatest100PostList()
+        if (prefetch) {
+            fetchAllPostList()  // prefetch
+        }
+        return postList
+    }
+
     const postList = await fetchAllPostList(reverse)
     return postListPagination(postList, page, itemsPerPage)
 }
