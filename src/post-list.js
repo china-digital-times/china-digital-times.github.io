@@ -62,6 +62,7 @@ export const fetchPostListPage = async (page, itemsPerPage = 100, reverse = true
  * @param {number=} itemsPerPage 
  */
 export const postListPagination = (postList, page, itemsPerPage = 100) => {
+    page--  // starts from 1
     return postList.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
 }
 

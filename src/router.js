@@ -11,6 +11,8 @@ export const updateRouter = (url = location.href) => {
     const u = new URL(url)
     const hash = u.hash
 
+    window.scrollTo(0, 0)
+
     if (!hash || !hash.startsWith("#/")) {
         location.href = "#/"
         return
