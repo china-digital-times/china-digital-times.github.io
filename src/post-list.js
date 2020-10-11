@@ -1,6 +1,7 @@
 // @ts-check
 
 import { fetchIndexData } from "./fetch-data"
+import { ROUTER_PREFIX } from "./router"
 
 /**
  * @typedef {Object} PostListItem
@@ -79,6 +80,6 @@ export const postListPagination = (postList, page, itemsPerPage = 100) => {
  * @param {PostListItem} post 
  */
 export const buildPostLink = (post) => {
-    return `#/id/${post.id}`
+    return `${ROUTER_PREFIX}/id/${post.id}`
 }
 

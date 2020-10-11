@@ -7,6 +7,8 @@ import loadPost from "./load-post"
 import { loadLoadingPage } from "./loading-page"
 import { load404Page } from "./404page"
 
+export const INDEX_PAGE_REG = /^#page-(\d+)$/
+
 const itemsPerPage = 100
 
 /**
@@ -21,7 +23,7 @@ const buildPaginator = (prevPage, nextPage) => {
         a.style.fontWeight = "700"
         a.style.fontSize = "18px"
         a.style.marginRight = "2em"
-        a.href = `#/?page=${p}`
+        a.href = `#page-${p}`
         a.text = name
         paginator.appendChild(a)
     }

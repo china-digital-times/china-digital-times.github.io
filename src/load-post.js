@@ -1,6 +1,7 @@
 // @ts-check
 
 import { getChineseDateString } from "./date"
+import { ROUTER_PREFIX } from "./router"
 
 /**
  * @typedef {Object} PostMeta
@@ -59,7 +60,7 @@ export const loadPost = (title, content, meta = null) => {
     // 修改站内链接跳转
     postContentContainer.querySelectorAll("a").forEach((a) => {
         if (a.href.match(/^https?:\/\/chinadigitaltimes.net\/chinese\/\d{4}\/\d{2}\//)) {
-            a.href = "#/link/" + a.href
+            a.href = `${ROUTER_PREFIX}/link/` + a.href
         }
     })
 

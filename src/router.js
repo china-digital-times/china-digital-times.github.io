@@ -1,36 +1,44 @@
 // @ts-check
 
-import { loadHomepage } from "./homepage"
+import { loadHomepage, INDEX_PAGE_REG } from "./homepage"
 import { load404Page } from "./404page"
 import { loadArticlePageByID, loadArticlePageByLink } from "./article-page"
 import { loadSearchPage } from "./search-page"
 
-const indexPageReg = /^#\/\?page=(\d+)$/
+export const ROUTER_PREFIX = "?"
 
 export const updateRouter = (url = location.href) => {
     const u = new URL(url)
-    const hash = u.hash
+    const route = u.search.slice(1)
 
     window.scrollTo(0, 0)
 
-    if (!hash || !hash.startsWith("#/")) {
-        location.href = "#/"
+    // upgrade from legacy router
+    const p = u.hash.match(/^#\/(.*)$/)
+    if (p) {
+        location.href = `${ROUTER_PREFIX}/${p[1]}`
         return
-    } else if (hash == "#/") {  // homepage
-        loadHomepage()
+    }
+
+    if (!route || !route.startsWith("/")) {
+        location.href = `${ROUTER_PREFIX}/`
         return
-    } else if (hash.match(indexPageReg)) {
-        const m = hash.match(indexPageReg)
-        loadHomepage(+m[1])
+    } else if (route == "/") {  // homepage
+        const m = u.hash.match(INDEX_PAGE_REG)
+        if (m) {
+            loadHomepage(+m[1])
+        } else {
+            loadHomepage()
+        }
         return
-    } else if (hash.startsWith("#/id/") || hash.startsWith("#/p/")) {
-        const m = hash.match(/^#\/(?:id|p)\/(\d+)\/?$/)
+    } else if (route.startsWith("/id/") || route.startsWith("/p/")) {
+        const m = route.match(/^\/(?:id|p)\/(\d+)\/?$/)
         if (m) {
             loadArticlePageByID(+m[1])
             return
         }
-    } else if (hash.startsWith("#/link/")) {
-        const m = hash.match(/^#\/link\/(?:https?:\/\/chinadigitaltimes.net)?\/*(.+)$/)
+    } else if (route.startsWith("/link/")) {
+        const m = route.match(/^\/link\/(?:https?:\/\/chinadigitaltimes.net)?\/*(.+)$/)
         if (m) {
             const linkURL = new URL(`https://chinadigitaltimes.net/${m[1]}`)
             let link = linkURL.origin + linkURL.pathname
@@ -38,8 +46,8 @@ export const updateRouter = (url = location.href) => {
                 link += "/"
             }
 
-            if (hash != `#/link/${link}`) {
-                location.href = `#/link/${link}`
+            if (route != `/link/${link}`) {
+                location.href = `${ROUTER_PREFIX}/link/${link}`
                 return
             }
 
@@ -53,8 +61,8 @@ export const updateRouter = (url = location.href) => {
             loadArticlePageByLink(linkDecoded)
             return
         }
-    } else if (hash.startsWith("#/search/")) {
-        const m = hash.match(/^#\/search\/(.+)$/)
+    } else if (route.startsWith("/search/")) {
+        const m = route.match(/^\/search\/(.+)$/)
         if (m) {
             const q = m[1]
             loadSearchPage(q)

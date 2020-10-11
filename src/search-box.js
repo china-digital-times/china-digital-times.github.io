@@ -1,5 +1,7 @@
 // @ts-check
 
+import { ROUTER_PREFIX } from "./router"
+
 export const showSearchBox = () => {
     const searchBoxContainer = document.getElementById("search-box")
 
@@ -19,7 +21,7 @@ export const showSearchBox = () => {
     }
     searchBoxContainer.appendChild(input)
 
-    const m = location.hash.match(/^#\/search\/(.+)$/)
+    const m = location.hash.match(`^\\${ROUTER_PREFIX}\\/search\\/(.+)$`)
     if (m) {
         try {
             input.value = decodeURIComponent(m[1])
@@ -31,7 +33,7 @@ export const showSearchBox = () => {
     const onSubmit = () => {
         const q = input.value.trim()
         if (q && q != "站内搜索") {
-            location.href = "#/search/" + q
+            location.href = `${ROUTER_PREFIX}/search/` + q
         }
     }
 

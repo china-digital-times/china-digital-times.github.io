@@ -1,6 +1,7 @@
 // @ts-check
 
 import { fetchPostData, fetchIndexData } from "./fetch-data"
+import { ROUTER_PREFIX } from "./router"
 import loadPost from "./load-post"
 
 import { loadLoadingPage } from "./loading-page"
@@ -29,7 +30,7 @@ export const loadArticlePageByLink = async (link) => {
     const id = link2id[link]
     if (id) {
         // loadArticlePageByID(+id)
-        location.href = `#/id/${id}`
+        location.href = `${ROUTER_PREFIX}/id/${id}`
     } else {
         load404Page()
     }
